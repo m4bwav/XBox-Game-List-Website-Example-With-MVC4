@@ -1,0 +1,34 @@
+﻿@model XboxGamesListAndVoting.Models.NerderyGameCollectionDisplay
+@{
+    ViewBag.Title = "XBox 360 Games!";
+}
+<div>
+    <h3>
+        Vote for a Game
+    </h3>
+    <p>
+        Vote weekly for the next game for The Nerdery to purchase - or add a new game to the list.
+    </p>
+    @if (Model.CanAddNewGame)
+    {
+        using (Html.BeginForm("AddNewGame", "Home", FormMethod.Post, new {@class = "form-inline add-game", role = "form"}))
+        {
+            Html.AntiForgeryToken();
+            @Html.Partial("NerderyValidationSummary", ViewData.ModelState)
+            @Html.LabelFor(x => x.NewGame.NewTitle, new {@class = "sr-only"})
+            @Html.TextBoxFor(x => x.NewGame.NewTitle, new {@class = "form-control", placeholder = "Game Title"})
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add New Game</button>
+        }
+    }
+</div>
+<div>
+    @Html.Partial("GameListPartial", Model.UnownedGames)
+</div>
+<div>
+    <h3>
+        The Nerdery's Current Collection
+    </h3>
+</div>
+<div>
+    @Html.Partial("GameListPartial", Model.OwnedGames)
+</div>

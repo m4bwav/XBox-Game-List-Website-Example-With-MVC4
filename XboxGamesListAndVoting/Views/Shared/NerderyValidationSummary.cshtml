@@ -1,0 +1,13 @@
+﻿@model ModelStateDictionary
+
+@if (!Model.IsValid)
+{
+    foreach (var modelError in 
+        Model.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Error</strong> @modelError.ErrorMessage
+        </div>
+    }
+}

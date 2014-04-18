@@ -1,0 +1,46 @@
+﻿@using XboxGamesListAndVoting.Extensions
+@model XboxGamesListAndVoting.Models.XboxGameListDisplay
+@if (Model.Games == null || !Model.Games.Any())
+{
+    <div class="no-titles">
+        No titles in list yet.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Votes
+                </th>
+                @if (Model.CanVote)
+                {
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model.Games)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(game.Title, "ViewGame", "Home", new {title = game.Title}, new {})
+                    </td>
+                    <td>
+                        @game.Votes
+                    </td>
+                    @if (Model.CanVote)
+                    {
+                        <td class="text-right">
+                            @Html.GlyphActionLink("Vote", "glyphicon-ok", "VoteForGame", "Home", new {title = game.Title}, new {@class = "btn btn-primary"})
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

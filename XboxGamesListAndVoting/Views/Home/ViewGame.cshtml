@@ -1,0 +1,35 @@
+﻿@using XboxGamesListAndVoting.Extensions
+@model XboxGamesListAndVoting.Models.XboxGameDisplay
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<ol class="breadcrumb">
+  <li>@Html.ActionLink("Games", "Index", "Home")</li>
+  <li class="active">@Model.Title</li>
+</ol>
+
+<p class="lead">
+    Votes: @Model.Votes
+</p>
+
+@if (Model.IsOwned)
+{
+    if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Success</strong> @TempData["SuccessMessage"]
+        </div>
+    }
+    <p>
+        <em>@Model.Title is owned by the Nerdery</em>
+    </p>
+}
+else
+{
+    <div>
+        @Html.GlyphActionLink("Save " + Model.Title + " to Nerdery Collection", "glyphicon-save", "OwnGame", "Home", new {Model.Title}, new {@class = "btn btn-primary"})
+    </div>
+}
