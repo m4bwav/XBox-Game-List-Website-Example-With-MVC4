@@ -1,6 +1,8 @@
 Game List Website Example With MVC4
 ========================================
 
+![A living room shelf of game cases with colourful abstract covers, a controller on the coffee table and a glowing television](https://raw.githubusercontent.com/m4bwav/XBox-Game-List-Website-Example-With-MVC4/master/.github/images/banner.jpg)
+
 An example website of an ASP.NET MVC 4 website with Autofac for DI, and bootstrap for UI.
 
 This application uses a web service for data access, and probably won't work for those without an api key.
